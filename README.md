@@ -77,3 +77,8 @@ cleos get currency balance eosio.token <voter account> EOS
 #查看现在的区块生产者
 cleos system listproducers
 ```
+
+### 11.启动其他节点
+做完10步后，初始节点应该就不出块了。这里按照步骤一，启动其他的节点。    
+修改配置文件config.ini，将producer_name改为<bp account>，将signature-provider替换成bp的公私钥。   
+修改p2p-peer-address、p2p-listen-endpoint，让不同节点能彼此发现，互相同步区块
