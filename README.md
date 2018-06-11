@@ -99,5 +99,5 @@ cleos system listproducers
 修改p2p-peer-address、p2p-listen-endpoint，让不同节点能彼此发现，互相同步区块
 
 ### 13.主网创世快照生成
-快照生成工具地址：https://github.com/EOS-Mainnet/genesis
-快照导入节点工具地址：https://github.com/EOSArgentina/firestarter
+快照生成工具地址：https://github.com/EOS-Mainnet/genesis    
+快照导入节点工具地址：https://github.com/EOSArgentina/firestarter    
