@@ -97,3 +97,7 @@ cleos system listproducers
 做完10步后，初始节点应该就不出块了。这里按照步骤一，启动其他的节点。    
 修改配置文件config.ini，将producer_name改为<bp account>，将signature-provider替换成bp的公私钥。   
 修改p2p-peer-address、p2p-listen-endpoint，让不同节点能彼此发现，互相同步区块
+
+### 13.主网创世快照生成
+快照生成工具地址：https://github.com/EOS-Mainnet/genesis
+快照导入节点工具地址：https://github.com/EOSArgentina/firestarter
