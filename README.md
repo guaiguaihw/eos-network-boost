@@ -61,7 +61,7 @@ cleos push action eosio updateauth '{"account": "eosio", "permission": "active",
 将其他的系统账户的权限交给eosio控制，这里系统账户有：eosio.bpay、eosio.msig、eosio.names、eosio.ram、eosio.ramfee、eosio.saving、eosio.stake、eosio.token、eosio.vpay   
 ```
 cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "owner",  "parent": "",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } } ' -p eosio.token@owner
-cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "active",  "parent": "owner",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } }' -p $account@active
+cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "active",  "parent": "owner",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } }' -p eosio.token@active
 
 ```
 
