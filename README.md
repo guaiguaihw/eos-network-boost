@@ -52,20 +52,7 @@ cleos push action eosio.token issue '[ "eosio", "1000000000.0000 EOS", "memo"]' 
 cleos set contract eosio contracts/eosio.system -p eosio
 ```
 
-### 8.重新分配权限
-将eosio的权限交给eosio.prods控制，eosio.prods是由21个超级节点控制的系统账户，生效交易需要15/21个节点签名     
-```
-cleos push action eosio updateauth '{"account": "eosio", "permission": "owner",  "parent": "",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio.prods", "permission": "active"} }] } } ' -p eosio@owner
-cleos push action eosio updateauth '{"account": "eosio", "permission": "active",  "parent": "owner",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio.prods", "permission": "active"} }] } }' -p eosio@active
-```
-将其他的系统账户的权限交给eosio控制，这里系统账户有：eosio.bpay、eosio.msig、eosio.names、eosio.ram、eosio.ramfee、eosio.saving、eosio.stake、eosio.token、eosio.vpay   
-```
-cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "owner",  "parent": "",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } } ' -p eosio.token@owner
-cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "active",  "parent": "owner",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } }' -p eosio.token@active
-
-```
-
-### 9.创建账户
+### 8.创建账户
 这里会创建投票账户voter1、voter2、voter3，创建节点账户bp1、bp2、bp3。   
 分给voter1、voter2、voter3分别1亿的eos，需要让bp出块，全网需要抵押1.5亿的eos(delegatebw cpu/net)，并执行投票(voteproducer)
 ```
@@ -73,12 +60,12 @@ cleos system newaccount eosio <account name> <owner_public_key> <active_public_k
 cleos transfer eosio <voter account> "100000000.0000 EOS" "transfer to voter"
 ```
 
-### 10.bp账号注册为出块节点
+### 9.bp账号注册为出块节点
 ```
 cleos system regproducer <bp account> <public key>
 ```
 
-### 11.voter账户抵押、投票
+### 10.voter账户抵押、投票
 注意，bp节点必须排序且不能重复
 ```
 #每个voter账户抵押5亿eos
@@ -93,10 +80,23 @@ cleos get currency balance eosio.token <voter account> EOS
 cleos system listproducers
 ```
 
-### 12.启动其他节点
+### 11.启动其他节点
 做完10步后，初始节点应该就不出块了。这里按照步骤一，启动其他的节点。    
 修改配置文件config.ini，将producer_name改为<bp account>，将signature-provider替换成bp的公私钥。   
 修改p2p-peer-address、p2p-listen-endpoint，让不同节点能彼此发现，互相同步区块
+
+### 12.重新分配权限
+将eosio的权限交给eosio.prods控制，eosio.prods是由21个超级节点控制的系统账户，生效交易需要15/21个节点签名     
+```
+cleos push action eosio updateauth '{"account": "eosio", "permission": "owner",  "parent": "",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio.prods", "permission": "active"} }] } } ' -p eosio@owner
+cleos push action eosio updateauth '{"account": "eosio", "permission": "active",  "parent": "owner",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio.prods", "permission": "active"} }] } }' -p eosio@active
+```
+将其他的系统账户的权限交给eosio控制，这里系统账户有：eosio.bpay、eosio.msig、eosio.names、eosio.ram、eosio.ramfee、eosio.saving、eosio.stake、eosio.token、eosio.vpay   
+```
+cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "owner",  "parent": "",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } } ' -p eosio.token@owner
+cleos push action eosio updateauth '{"account": "比如eosio.token", "permission": "active",  "parent": "owner",  "auth": { "threshold": 1, "keys": [], "waits": [], "accounts": [{ "weight": 1, "permission": {"actor": "eosio", "permission": "active"} }] } }' -p eosio.token@active
+
+```
 
 ### 13.主网创世快照生成
 快照生成工具地址：https://github.com/EOS-Mainnet/genesis    
