@@ -29,7 +29,7 @@ cleos push action eosio setprods '{"schedule":[{"producer_name":"eosio","block_s
 ### 4.创建一系列系统账号
 需要创建的系统账号有：eosio.bpay、eosio.msig、eosio.names、eosio.ram、eosio.ramfee、eosio.saving、eosio.stake、eosio.token、eosio.vpay
 ```
-cleos create account eosio eosio.token <public key> <private key>
+cleos create account eosio eosio.token <owner public key> <active public key>
 ```
 
 ### 5.安装其他系统合约
